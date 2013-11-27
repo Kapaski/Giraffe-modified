@@ -18,13 +18,14 @@ var dashboards =
 		"renderer":"line"
       },
 	  {
-        "alias": "memory.available_memory",  // display name for this metric
-        "target": "localhost.memory.available_memory",  // enter your graphite barebone target expression here
-        "description": "host 2 memory.available_memory",  // enter your metric description here
+        "alias": "% memory used",  // display name for this metric
+        "target": "localhost.memory.committed_percent",  // enter your graphite barebone target expression here
+        "description": "host 2 used memory in %",  // enter your metric description here
 		"renderer" : "gauge",
         "size" : 200 //currently for gauge only
 
       }
+
       
     ]
   },

@@ -250,7 +250,9 @@ createGraph = function(anchor, metric) {
 
   } else if (metric.renderer === 'gauge') { //customised visualisations
     graph_provider = Visuals.Graph.JSONP.Graphite;
-    return graph = getGaugeInstance(graph_provider, anchor, metric)
+    graph = getGaugeInstance(graph_provider, anchor, metric)
+    //console.log(graph)
+    return graph
 
   } else { // Giraffe out of box
     graph_provider = Rickshaw.Graph.JSONP.Graphite;
@@ -504,6 +506,7 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
         var deferred,
             _this = this;
         deferred = this.getAjaxData(period);
+
         return deferred.done(function(result) {
             var annotations, el, i, result_data, series, _i, _len;
             if (result.length <= 0) {
@@ -513,11 +516,14 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
                 var _ref;
                 return el.target !== ((_ref = _this.args.annotator_target) != null ? _ref.replace(/["']/g, '') : void 0);
             });
+
+            //Raw Graphite data in json format
             result_data = _this.preProcess(result_data);
             if (!_this.graph) {
                 _this.success(_this.parseGraphiteData(result_data, _this.args.null_as));
             }
             series = _this.parseGraphiteData(result_data, _this.args.null_as);
+            //console.log(series)
             if (_this.args.annotator_target) {
                 annotations = _this.parseGraphiteData(_.filter(result, function(el) {
                     return el.target === _this.args.annotator_target.replace(/["']/g, '');
@@ -525,8 +531,8 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
             }
             for (i = _i = 0, _len = series.length; _i < _len; i = ++_i) {
                 el = series[i];
+                //console.log(_this.graph)
                 _this.graph.series[i].data = el.data;
-                _this.addTotals(i);
             }
 
             _this.graph.renderer.unstack = _this.args.unstack;
@@ -659,7 +665,7 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
 
 })
 function getGaugeInstance(obj, anchor, metric) {
-    console.log(metric)
+
     return new obj({
         anchor: anchor,
         size:metric.size,

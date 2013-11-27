@@ -434,7 +434,6 @@ Visuals.Graph = function(args) {
         }
 
         this.setRenderer(args.renderer || 'stack', args);
-        this.discoverRange();
     };
 
     this.validateSeries = function(series) {
@@ -451,15 +450,12 @@ Visuals.Graph = function(args) {
         return [min, max];
     };
 
-    this.discoverRange = function() {
-    };
 
     this.render = function() {
 
         var stackedData = this.stackData();
-        this.discoverRange();
 
-        this.renderer.render();
+        this.renderer.render(this.series);
 
         this.updateCallbacks.forEach( function(callback) {
             callback();
@@ -527,6 +523,7 @@ Visuals.Graph = function(args) {
         } );
 
         this.stackedData = stackedData;
+
         return stackedData;
     };
 
@@ -635,7 +632,7 @@ Visuals.Graph.Ajax = Visuals.Class.create( {
     initialize: function(args) {
 
         this.dataURL = args.dataURL;
-
+        console.log(this.dataURL)
         this.onData = args.onData || function(d) { return d };
         this.onComplete = args.onComplete || function() {};
         this.onError = args.onError || function() {};
@@ -664,6 +661,7 @@ Visuals.Graph.Ajax = Visuals.Class.create( {
     success: function(data, status) {
 
         data = this.onData(data);
+
         this.args.series = this._splice({ data: data, series: this.args.series });
 
         this.graph = this.graph || new Visuals.Graph(this.args);
@@ -752,7 +750,7 @@ Visuals.Graph.Renderer = Visuals.Class.create( {
     },
 
     render: function(args) {
-        console.log(args)
+        //console.log(args)
     },
 
     _styleSeries: function(series) {
@@ -840,19 +838,28 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         return gauge;
     },
 
-    updateGauges : function(gauge){
-            var value = [1,2];
+    updateGauges : function(gauge, series){
+            console.log(series)
+            var value
+            for(var k = (series[0].data.length-1); k>=0; k--) {
+                value = series[0].data[k].y
+                if(value!=null){
+                    console.log("at "+k+" find "+value)
+
+                    break;
+                }
+            }
             gauge.redraw(value);
     },
 
-    render : function(args) {
+    render : function(series) {
 
         var id = "#gauge-"+this.params.anchor.replace("#","")
         if(!$(id).length>0) {
             this._gauge = this.gaugeFactory(this.params.size, this.params.anchor,this.params.alias);
 
         } else {
-           this.updateGauges(this._gauge)
+           this.updateGauges(this._gauge,series)
         }
 
     }
