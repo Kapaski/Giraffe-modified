@@ -6,7 +6,7 @@ a playgournd of trying to add more visualisations to Gireffe
 Hosted on nodejs
 
 Run
-     $node app.js
+     $> node app.js
 
 access
      http://localhost:3000/giraffe/index.html
