@@ -1,0 +1,6 @@
+﻿.dialogue button {
+  display: inline-block !important;
+}
+.qtip-content button {
+  float: right;
+}

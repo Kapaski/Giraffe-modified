@@ -1,0 +1,165 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+body {
+  /*background-color:#809eaf;*/
+
+  /* IE10 Consumer Preview */
+  background-image: -ms-linear-gradient(top, #ffffff 0%, #809eaf 100%);
+  /* Mozilla Firefox */
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #809eaf 100%);
+  /* Opera */
+  background-image: -o-linear-gradient(top, #ffffff 0%, #809eaf 100%);
+  /* Webkit (Safari/Chrome 10) */
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ffffff), color-stop(1, #809eaf));
+  /* Webkit (Chrome 11+) */
+  background-image: -webkit-linear-gradient(top, #ffffff 0%, #809eaf 100%);
+  /* W3C Markup, IE10 Release Preview */
+  background-image: linear-gradient(to bottom, #ffffff 0%, #809eaf 100%);
+}
+#login_logo {
+  margin: 0 auto;
+  width: 235px;
+  height: 40px;
+  margin-top: 50px;
+}
+#login_logo img {
+  width: 235px;
+}
+/* Form elements */
+.textfield-Login {
+  float: left;
+  width: 91%;
+  height: 37px;
+  margin: 5px 0;
+  margin-left: 11px;
+  color: #ffffff;
+  background-color: #365c85;
+}
+.textfieldLabel-Login {
+  float: left;
+  line-height: 2.5em;
+  padding-left: 11px;
+}
+.textfieldInput-Login {
+  float: right;
+}
+.textfieldInput-Login input {
+  border-radius: 0;
+  height: 27px;
+  width: 145px;
+  margin: 0 !important;
+  border: 1px solid #365c85;
+  border-left: none;
+}
+.title-Login {
+  font-size: 1.2em;
+  margin: 0 0 20px 10px;
+}
+.lnk-Login a {
+  float: left;
+  color: #026eab;
+  margin: -28px 0 0 10px;
+}
+.itemRight-Login {
+  text-align: right;
+  margin: 7px 0;
+  margin-right: 11px;
+}
+section.middleWrapper {
+  margin: 0 auto;
+  border: none;
+  width: 270px;
+  padding: 10px;
+  height: 100%;
+  top: 50%;
+}
+label {
+  font-size: 1em;
+}
+footer {
+  font-size: .8em;
+  text-align: center;
+  margin-top: 100px;
+}
+/* Error message upon login */
+#response {
+  color: #ff0000;
+  font-size: 1em;
+  text-align: center;
+  padding: 10px 0;
+  width: 212px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+/*Captcha*/
+#refreshcaptcha {
+  font-size: 25px;
+  color: #01377f;
+  display: block;
+  cursor: pointer;
+  float: right;
+  margin: 10px 15px 0 0;
+}
+#imgCaptcha {
+  display: block;
+  width: 170px;
+  float: left;
+}
+#globalcaptcha {
+  display: block;
+  margin-left: -10px;
+}
+#globalcaptcha img {
+  margin: 13px 6px 10px 13px;
+  width: 220px;
+}
+#globalcaptchaLabel {
+  clear: both;
+  margin-left: -5px;
+}
+#globalcaptchaLabel #Captcha {
+  margin-top: 5px;
+}
+.left-home {
+  margin: 10px 0 0 -5px;
+}
+.left-home a {
+  padding-left: 10px;
+  font-size: .8em;
+  color: #0088cc;
+}
+.left-home a:hover {
+  color: #005580;
+}
+.validationSummary .field-validation-error {
+  clear: left;
+  float: right;
+  color: #ff0000;
+  margin-bottom: 10px;
+}

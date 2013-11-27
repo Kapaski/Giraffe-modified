@@ -1,0 +1,15 @@
+﻿.dialogue button {
+  display: inline-block !important;
+}
+.qtip-content button {
+  float: right;
+}
+.toast-title,
+.toast-message {
+  margin-left: -10px;
+}
+/*#toast-message{
+width:400px ;
+margin-right:0;
+padding-top:100px;
+}*/

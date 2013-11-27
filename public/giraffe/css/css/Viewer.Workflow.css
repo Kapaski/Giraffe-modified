@@ -1,0 +1,342 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+/* -------------------- Navigation -------------------- */
+#RA_Approve,
+#RA_Approve_Diff,
+#RA_Disapprove,
+#RA_Disapprove_Diff,
+#RA_Complete,
+#RA_Complete_Diff {
+  display: none;
+}
+/* -------------------- Comments Header -------------------- */
+.commentsAreaHeader {
+  padding: 10px;
+  color: #ffffff;
+  background-color: #6f8298;
+}
+/* -------------------- General Comments -------------------- */
+/* Input field */
+#GenCommentInput {
+  margin: 2px 0 5px 10px;
+  height: 115px;
+  display: none;
+  width: 87%;
+}
+/* Buttons */
+.ActionButtonsSimple {
+  text-align: right;
+  margin-right: 10px;
+}
+/* Buttons */
+#btnAdd_GenComment,
+#btnUpdate_GenComment,
+#btnClose_GenComment,
+#btnEdit_GenComment,
+#btnNew_GenComment,
+#btnRemove_GenComment,
+#btnRemove_GenComment_Diff {
+  display: none;
+}
+/* Text */
+.generalComment {
+  font-style: normal;
+  color: #000000;
+}
+/* Containers */
+#GeneralCommentsWrapper {
+  height: 210px;
+  border-bottom: 1px solid #e2e2e2;
+}
+.GeneralCommentsInnerWrapper {
+  overflow: auto;
+  max-height: 190px;
+}
+/* -------------------- Inline Comments -------------------- */
+/* Input field */
+#InlineCommentInput {
+  margin: 2px 0 5px 10px;
+  height: 176px;
+  display: none;
+  width: 87%;
+}
+/* Buttons */
+#btnSave_InlineComment,
+#btnClose_InlineComment_Form,
+#btnClose_InlineComment_Form_Diff,
+#btnAdd_InlineComment,
+#btnAdd_InlineComment_Diff,
+#btnUpdate_InlineComment,
+#btnUpdate_InlineComment_Diff,
+#btnEdit_InlineComment,
+#btnEdit_InlineComment_Diff,
+#btnNew_InlineComment,
+#btnNew_InlineComment_Diff,
+#btnRemove_InlineComment,
+#btnRemove_InlineComment_Diff {
+  display: none;
+}
+/* Highlights */
+.highlightSelectedElement {
+  padding: 2px;
+  background-color: #fafd9d;
+}
+.highlightSelectedElement_TD td {
+  margin: 5px;
+  background-color: #fafd9d !important;
+}
+.FlaggedInlineComment {
+  display: none;
+  padding: 5px;
+  z-index: 999;
+  position: fixed;
+  margin-top: -50px;
+}
+#passedValue,
+#workflowList {
+  display: none;
+}
+.sp.viewer.generalCommentWrapper {
+  font-size: 1em;
+  margin-bottom: 50px;
+}
+/* Bullets */
+.inlineCommentList_Bullet {
+  float: left;
+  font-size: 1.5em;
+  margin-right: 5px;
+}
+/* Containers */
+#workflowInlineCommentList {
+  overflow: auto;
+}
+#InlineCommentsWrapper {
+  margin-top: 20px;
+}
+#InlineCommentTextWrapper {
+  overflow: auto;
+}
+/* -------------------- General and Inline Comments -------------------- */
+/* Name of reviewer */
+.reviewerInList {
+  font-size: .9em;
+  margin: 10px 0 0 0;
+  font-style: italic;
+  color: #828282;
+}
+/* Characters count */
+.generalCharactersLeft,
+.inlineCharactersLeft {
+  display: none;
+  font-size: .8em;
+  float: left;
+  margin: 10px 0 0 12px;
+}
+/*  Render the comments as-is (did not remove spaces 
+    and line-breaks between the first and last words.*/
+.inlineListCommentText,
+.generalComment {
+  white-space: pre-wrap;
+  font-size: 100%;
+  line-height: normal;
+}
+.inlineListCommentText {
+  color: #026eab;
+  cursor: pointer;
+  font-size: .9em;
+}
+.inlineCommentList {
+  margin-left: 16px;
+}
+.inlineCommentList :hover {
+  text-decoration: underline;
+  color: #005580;
+}
+#GeneralCommentsEditor,
+#InlineCommentsEditor {
+  display: none;
+}
+/* Containers */
+.CommentsArea,
+.CommentsArea_Policy {
+  position: fixed;
+  top: 80px;
+  right: 5px;
+  width: 270px;
+  height: 98%;
+  background-color: #e2e2e2;
+  color: #000000;
+  margin: 29px -5px 0 20px;
+}
+.CommentsArea_Policy {
+  margin: 0px -5px 0 20px;
+}
+/* -------------------- Doc diff  -------------------- */
+/* Current and previous document container */
+#CurrentPreviousDocument {
+  padding-right: 275px;
+  /* padding should be the total width of all right columns */
+
+}
+#CurrentDocument {
+  float: left;
+  width: 99%;
+  /*overflow:auto;*/
+
+}
+#PreviousDocumentDiff {
+  clear: left;
+  float: left;
+  width: 49%;
+  /*overflow:auto;*/
+
+}
+#CurrentDocumentDiff {
+  float: right;
+  width: 49%;
+  /*overflow:auto;*/
+
+}
+.diffVersion {
+  margin-bottom: 5px;
+}
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+/* -------------------- Legends -------------------- */
+#LegendsWrapper > div {
+  padding: 2px;
+}
+.legendColor {
+  margin: 0 5px 0 0;
+  padding: 8px;
+  float: left;
+  clear: both;
+}
+.ActionButtons {
+  margin-top: 10px;
+  border-top: 1px solid #b8bfc8;
+  padding-top: 10px;
+  text-align: right;
+}
+/* Version difference */
+.addedElement {
+  background-color: #9ef09a;
+}
+.removedElement {
+  background-color: #fb5e5b;
+}
+.conflictElement {
+  background-color: #fff9b6;
+}
+.addedChangedElement {
+  background-color: #dbfc87;
+}
+.removedChangedElement {
+  background-color: #ffb178;
+}
+.hiddenElement {
+  visibility: hidden;
+}
+.mergeShowElement {
+  background-color: #f0b6ff;
+}
+.mergeHiddenElement {
+  background-color: #ceb188;
+}
+/* Popover */
+#LegendCommentWrapper {
+  display: none;
+  text-align: left;
+  font-family: 'Segoe UI', Tahoma, 'Sans Serif', Arial, 'Shell UI', 'Trebuchet MS', Verdana;
+  font-size: 1em;
+  z-index: 999;
+  position: fixed;
+  padding: 10px;
+  background: #577595;
+  color: #ffffff;
+  top: 80px;
+  left: 70px;
+}
+#LegendCommentWrapper :after,
+#LegendCommentWrapper :before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+#LegendCommentWrapper :after {
+  border-color: transparent;
+  border-width: 0;
+  margin-left: -2px;
+}
+#LegendCommentWrapper :before {
+  border-bottom-color: #577595;
+  border-width: 10px;
+  left: 20px;
+  margin-left: 0px;
+}
+/* -------------------- Others -------------------- */
+/* Markers */
+.marker {
+  padding: 0 5px;
+  background-color: #ff0000;
+  border-top: 1px solid #fff;
+  margin-left: -10px;
+}
+table.noStyling {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+table.noStyling td {
+  padding: 0 !important;
+  background-color: #f3f3f3;
+  vertical-align: top;
+}
+table.noStyling tr:first-child td {
+  border: none;
+}
+.quickLinksTable {
+  text-align: left;
+}
+/* Tabs of tasks */
+#CurrentPreviousDocument .taskTabVertBar {
+  margin-top: 0;
+}
+#quickLinksTable td p,
+#quickLinksTable td table {
+  display: inline;
+}

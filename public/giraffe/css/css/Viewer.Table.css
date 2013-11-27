@@ -1,0 +1,90 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+/* Tables */
+table {
+  margin-bottom: 10px;
+}
+/* For alternating row color */
+.odd {
+  background-color: #f0f0f0;
+}
+/* Header */
+tr:first-child {
+  background-color: #d6d6d6;
+  color: #000000;
+  font-weight: normal;
+}
+/* Cells */
+td {
+  padding: 10px 7px 0px 10px;
+  border: 1px solid #cacaca;
+  height: 20px;
+}
+#notificationsWrapper tr:first-child {
+  font-weight: bold;
+}
+/* Table for Quicklinks */
+table.quicklinks {
+  background-color: transparent;
+  border: none;
+  border-collapse: separate;
+  float: none !important;
+}
+table.quicklinks tr {
+  text-align: center;
+}
+table.quicklinks td {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+table.quicklinks table {
+  width: 100%;
+  margin-bottom: 0;
+}
+table.quicklinks table tr {
+  background-color: transparent;
+}
+tr.quickLinksRow {
+  background-color: transparent;
+}
+tr.quickLinksRow td {
+  padding: 2px 0px;
+}
+table[cell_alignment=Fixed] {
+  table-layout: fixed;
+}
+/* Table for tasks preloaded details */
+table.taskDetail {
+  background-color: #fff;
+}
+table.taskDetail img {
+  width: 20px;
+  margin-top: -11px;
+}

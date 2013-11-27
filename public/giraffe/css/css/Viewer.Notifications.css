@@ -1,0 +1,99 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+#notificationPeriod {
+  font-family: 'Segoe UI', Tahoma, 'Sans Serif', Arial, 'Shell UI', 'Trebuchet MS', Verdana;
+  display: none;
+  position: fixed;
+  text-align: left;
+  font-size: 12px;
+  z-index: 99999;
+  padding: 10px;
+  margin-left: -145px;
+  width: 115px;
+  margin-top: -10px;
+  color: #ffffff;
+  background-color: #577595;
+}
+#notificationPeriod :after {
+  border: solid transparent;
+  content: " ";
+  position: absolute;
+  /* This is the triangle that extends the link */
+
+  border-left-color: #577595;
+  border-width: 10px;
+  right: -20px;
+  top: 10px;
+}
+#notificationPeriod > div:first-child {
+  font-size: 1em;
+}
+#EditNotificationPeriod > div:first-child {
+  padding-top: 5px;
+}
+#notificationPeriod > div:nth-child(2),
+#EditNotificationPeriod > div:nth-child(2) {
+  border-bottom: 1px solid #808080;
+  border-top: 1px solid #808080;
+  padding: 5px 0;
+  margin: 7px 0 10px 0;
+}
+#notificationPeriod > #ActionButtons {
+  text-align: center;
+}
+/* EDIT NOTIFICATION */
+#EditNotificationPeriod {
+  display: none;
+  position: absolute;
+  float: left;
+  text-align: left;
+  z-index: 2;
+  padding: 0 10px 10px 10px;
+  margin-left: -155px;
+  margin-top: -20px;
+  color: #ffffff;
+  background-color: #577595;
+}
+#EditNotificationPeriod :after {
+  border: solid transparent;
+  content: " ";
+  position: absolute;
+  /* This is the triangle that extends the link */
+
+  border-left-color: #577595;
+  border-width: 10px;
+  right: -20px;
+  top: 20px;
+}
+img[data-notify] {
+  cursor: pointer;
+}
+.hide {
+  display: none;
+}

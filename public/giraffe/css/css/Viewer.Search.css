@@ -1,0 +1,361 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+#searchArea {
+  display: none;
+  z-index: 51;
+  right: 40px;
+  width: 125px;
+  position: fixed;
+  top: 34px;
+  padding-right: 2px;
+  padding-left: 2px;
+}
+#searchAdvanceWrapper {
+  float: left;
+  width: 20px;
+  margin-top: 3px;
+  height: 22px;
+  color: white;
+  background-color: #b5c2cf;
+  font-family: svgfont_1regular;
+  font-size: .7em;
+  text-align: center;
+  padding: 4px 0 0 2px;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+a#searchAdvanceButton {
+  text-decoration: none;
+  color: #b5c2cf;
+  cursor: pointer;
+}
+a#searchAdvanceButton:hover,
+a#searchBasicButton:hover {
+  color: #01377F;
+  cursor: pointer;
+}
+#searchAdvancePopup {
+  display: none;
+  background-color: #b5c2cf;
+  margin: 7px 0px 0 -5px;
+  width: 150px;
+  float: left;
+  font-family: Arial, serif;
+  padding: 0 5px;
+  padding-top: 15px;
+  text-align: left;
+  font-weight: bold;
+  color: #6f8298;
+}
+/*Search BY Folders Button*/
+#searchAdvanceButton {
+  background-image: url(/Images/arrow-down-icon.png);
+  margin: 7px 0 0 5px;
+  background-repeat: no-repeat;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+#searchAdvanceButton.toggle {
+  background-image: url(/Images/arrow-up-icon.png);
+  margin: 7px 0 0 5px;
+  background-repeat: no-repeat;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+#searchItem {
+  width: 74px;
+  height: 18px;
+  background-color: #b5c2cf;
+  color: #01377f;
+  border: none;
+  padding: 4px;
+  margin-top: 3px;
+}
+#searchBasicWrapper {
+  float: right;
+  width: 19px;
+  margin-top: 3px;
+  height: 24px;
+  color: white;
+  background-color: #b5c2cf;
+  font-family: svgfont_1regular;
+  text-align: center;
+  padding: 2px 0 0 2px;
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+a#searchBasicButton {
+  text-decoration: none;
+  color: #6f8298;
+  padding: 3px 0 0 0;
+  float: left;
+}
+.searchFocus {
+  background-color: #FF9462;
+}
+/*Search BY Folders*/
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+#searchfolders select {
+  background: #ffffff url(/Images/select_background.png);
+  border: 1px solid #90a5b9;
+}
+#searchfolders {
+  display: none;
+  z-index: 49;
+  position: absolute;
+  float: right;
+  padding: 10px;
+  padding-top: 0px;
+  background: #b5c2cf;
+  width: 310px;
+  height: auto;
+  top: 95px;
+  right: 5px;
+  color: #000;
+  border: 4px solid #777777;
+}
+#searchfolders:after,
+#searchfolders:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+#searchfolders:after {
+  border-color: transparent;
+  border-bottom-color: #b5c2cf;
+  border-width: 20px;
+  left: 70%;
+  margin-left: -20px;
+}
+#searchfolders:before {
+  border-color: transparent;
+  border-bottom-color: #777777;
+  border-width: 26px;
+  left: 70%;
+  margin-left: -26px;
+}
+#closeSearchFolder {
+  position: relative;
+  top: 0px;
+  right: 3px;
+  height: 15px;
+  margin-bottom: 10px;
+}
+div#closeSearchFolder a {
+  font-size: 1.4em;
+}
+#jstreeContainer {
+  overflow: auto;
+}
+/*SEARCH RESULTS*/
+h1.searchResultHeader {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+.searchResult li {
+  list-style-type: none;
+}
+.searchResult .bullet {
+  margin-left: 0px;
+}
+.searchResult p:nth-child(3n+1):not(:first-child) {
+  border-bottom: 1px solid #B7B7B7;
+  padding-bottom: 7px;
+}
+.searchResult li:not(a) {
+  font-size: 1em;
+}
+.breadCrumbs {
+  font-size: .8em;
+  display: block;
+}
+.searchDetails {
+  font-size: .8em;
+  display: block;
+}
+.searchDetails span {
+  display: inline;
+  font-size: 1em;
+}
+/* Icons for Doc Types*/
+.searchIcons {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+}
+.searchIconsProcedure {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_procedure.png);
+}
+.searchIconsFolder {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_folder.png);
+}
+.searchIconsExternal {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_external.png);
+}
+.searchIconsPolicy {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_policy.png);
+}
+.searchIconsProcess {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_process.png);
+}
+.searchIconsReusable {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  background-image: url(/Content/icons/icon_reusableContent.png);
+}
+.searchIconsBullet {
+  width: 16px;
+  height: 16px;
+  float: left;
+  color: #0577AA;
+  margin: 2px 3px 0 0;
+  background-repeat: no-repeat;
+  margin-top: 4px;
+  margin-right: -3px;
+  background-image: url(/Content/icons/icon_bullet.png);
+}
+/* SEARCH / NAVIGATIONS PAGE */
+.bread_arrow {
+  color: gray;
+}
+.crumbs {
+  display: block;
+}
+.crumbs li {
+  display: inline;
+}
+.crumbs li a:hover {
+  color: orange;
+}
+.crumbs li a {
+  color: #666;
+  display: block;
+  float: left;
+  font-size: .69em;
+  padding-right: 3px;
+  position: relative;
+  text-decoration: none;
+}
+.icon.searchResults,
+.icon.navigationResults {
+  width: 20px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+  margin-top: 2px;
+  /*border: 1px solid gray;*/
+
+}
+#searchResults > li,
+#navigationResults > li {
+  float: left;
+  display: block;
+  margin: 4px;
+  clear: both;
+  padding-bottom: 9px;
+  border-bottom: 1px dotted lightgray;
+  width: 318px;
+}
+.navigationResultsDateTime {
+  clear: both;
+  font-size: .68em;
+  margin-left: 27px;
+  color: #666;
+  line-height: 1.1em;
+}
+.navigationResultsTitle,
+searchResultsTitle {
+  font-size: 1em;
+}
+ul.notificationsList {
+  font-size: .8em;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
+ul.notificationsList a {
+  color: gray;
+}
+ul.notificationsList a:hover {
+  color: #EE5E15;
+}
+#searchBarCodeWrapper {
+  float: left;
+  background-color: #b5c2cf;
+  margin-top: 3px;
+  padding-top: 8px;
+  color: #6f8298;
+}
+.searchResult .bullet li {
+  font-size: 1.1em;
+}

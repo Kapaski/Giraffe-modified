@@ -1,0 +1,75 @@
+﻿/* Body */
+/* Headers 1 */
+/* General Header */
+/* Secondary Window */
+/* Tasks */
+/* Document */
+/* Headers 2 */
+/* General */
+/* Form */
+/* Modals */
+/* Document */
+/* Headers 4 */
+/* General */
+/* Headers 5 */
+/* General */
+/* Error */
+/* Popovers/Sliders/Boxes */
+/* Forms Textfields */
+/* Paragraph */
+/* Links */
+/* Find highlight*/
+/* Switch */
+/* Tables */
+/* Lists */
+/* Tabs and Contents */
+/* Secondary Window */
+/* Navigation */
+/* Review and Approve */
+#AddNoteContainer,
+#ListNoteContainer {
+  display: none;
+  width: 335px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 10px 10px 50px 10px;
+  z-index: 5;
+  color: #ffffff;
+  background-color: #577595;
+}
+#AddNoteWrapper {
+  width: 305px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+#AddNoteTextArea {
+  width: 300px;
+  height: 100px;
+}
+#ListNoteContainer .itemRight {
+  margin-right: 5px;
+}
+.NoteContainerWrapper {
+  max-height: 500px;
+  min-height: 18px;
+  overflow: auto;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #fff;
+}
+.NoteDetails {
+  font-size: .8em;
+}
+.NoteText {
+  margin-top: 10px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.NoteDetailsContainer {
+  padding: 5px;
+  border-bottom: 1px solid #d0d9e3;
+}
+.btnDelete_Note {
+  float: right;
+  margin-top: 0;
+}
