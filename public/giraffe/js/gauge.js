@@ -5,7 +5,7 @@
 function Gauge(placeholderName, configuration)
 {
     this.placeholderName = placeholderName;
-
+    //console.log(placeholderName)
     var self = this; // for internal d3 functions
 
     this.configure = function(configuration)

@@ -17,12 +17,19 @@ var dashboards =
         "description": "host 1 memory metrics" , // enter your metric description here
 		"renderer":"line"
       },
+        {
+            "alias": "localhost.memory",  // display name for this metric
+            "target": "localhost.memory.*",  // enter your graphite barebone target expression here
+            "description": "host 1 memory metrics" , // enter your metric description here
+            "renderer":"line"
+        },
+
 	  {
-        "alias": "% memory used",  // display name for this metric
+        "alias": "% used",  // display name for this metric
         "target": "localhost.memory.committed_percent",  // enter your graphite barebone target expression here
         "description": "host 2 used memory in %",  // enter your metric description here
 		"renderer" : "gauge",
-        "size" : 200 //currently for gauge only
+        "size" : 120 //currently for gauge only
 
       }
 

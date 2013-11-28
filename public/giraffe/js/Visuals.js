@@ -421,10 +421,10 @@ Visuals.Graph = function(args) {
         this.setSize({ width: args.width, height: args.height });
 
         this.element.classList.add('Visuals_graph');
-        this.vis = d3.select(this.element)
-            .append("svg:svg")
-            .attr('width', this.width)
-            .attr('height', this.height);
+//        this.vis = d3.select(this.element)
+//            .append("svg:svg")
+//            .attr('width', this.width)
+//            .attr('height', this.height);
 
         for (var name in Visuals.Graph.Renderer) {
             if (!name || !Visuals.Graph.Renderer.hasOwnProperty(name)) continue;
@@ -614,9 +614,9 @@ Visuals.Graph = function(args) {
         this.width = args.width || elementWidth || 400;
         this.height = args.height || elementHeight || 250;
 
-        this.vis && this.vis
-            .attr('width', this.width)
-            .attr('height', this.height);
+//        this.vis && this.vis
+//            .attr('width', this.width)
+//            .attr('height', this.height);
     };
 
     this.initialize(args);
@@ -820,6 +820,8 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
     seriesPathFactory: {},
 
     gaugeFactory : function(size, anchor, label, min, max){
+        //console.log(anchor)
+
         var config =
         {
             size: size || 120,
@@ -839,12 +841,12 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
     },
 
     updateGauges : function(gauge, series){
-            console.log(series)
-            var value
+
+            var value;
             for(var k = (series[0].data.length-1); k>=0; k--) {
                 value = series[0].data[k].y
                 if(value!=null){
-                    console.log("at "+k+" find "+value)
+            //        console.log("at "+k+" find "+value)
 
                     break;
                 }
@@ -854,9 +856,13 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
 
     render : function(series) {
 
+
         var id = "#gauge-"+this.params.anchor.replace("#","")
-        if(!$(id).length>0) {
-            this._gauge = this.gaugeFactory(this.params.size, this.params.anchor,this.params.alias);
+        var svgid = "#gauge-"+id.replace("#","")
+
+//        console.log($(svgid).length)
+        if(!$(svgid).length>0) {
+            this._gauge = this.gaugeFactory(this.params.size,id,this.params.alias);
 
         } else {
            this.updateGauges(this._gauge,series)

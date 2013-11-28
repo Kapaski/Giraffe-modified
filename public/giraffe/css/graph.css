@@ -8,6 +8,14 @@
 	overflow: hidden;
 }
 
+.Visuals_graph {
+    position: relative;
+}
+.Visuals_graph svg {
+    display: block;
+    overflow: hidden;
+}
+
 /* ticks */
 
 .rickshaw_graph .x_tick {

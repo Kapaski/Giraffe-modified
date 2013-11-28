@@ -139,7 +139,8 @@ refreshSummary = function(graph) {
 
 graphScaffold = function() {
   var colspan, context, converter, graph_template, i, metric, offset, _i, _len;
-  graph_template = "{{#dashboard_description}}\n    <div class=\"well\">{{{dashboard_description}}}</div>\n{{/dashboard_description}}\n{{#metrics}}\n  {{#start_row}}\n  <div class=\"row-fluid\">\n  {{/start_row}}\n    <div class=\"{{span}}\" id=\"graph-{{graph_id}}\">\n      <h2>{{metric_alias}} <span class=\"pull-right graph-summary\"><span></h2>\n      <div class=\"chart\"></div>\n      <div class=\"timeline\"></div>\n      <p>{{metric_description}}</p>\n      <div class=\"legend\"></div>\n    </div>\n  {{#end_row}}\n  </div>\n  {{/end_row}}\n{{/metrics}}";
+  graph_template = "{{#dashboard_description}}\n    <div class=\"well\">{{{dashboard_description}}}</div>\n{{/dashboard_description}}\n{{#metrics}}\n  {{#start_row}}\n  " +
+      "<div class=\"row-fluid\">\n  {{/start_row}}\n    <div class=\"{{span}}\" id=\"graph-{{graph_id}}\">\n      <h2>{{metric_alias}} <span class=\"pull-right graph-summary\"><span></h2>\n      <div class=\"chart\" id=\"{{graph_renderer}}-graph-{{graph_id}}\"></div>\n      <div class=\"timeline\"></div>\n      <p>{{metric_description}}</p>\n      <div class=\"legend\"></div>\n    </div>\n  {{#end_row}}\n  </div>\n  {{/end_row}}\n{{/metrics}}";
   $('#graphs').empty();
   context = {
     metrics: []
@@ -158,10 +159,12 @@ graphScaffold = function() {
       graph_id: i,
       span: 'span' + (4 * colspan),
       metric_alias: metric.alias,
+      graph_renderer : metric.renderer,
       metric_description: metric.description
     });
     offset += colspan;
   }
+  //Mustache lib here uses json data and template to generate from parent div to child svg
   return $('#graphs').append(Mustache.render(graph_template, context));
 };
 
