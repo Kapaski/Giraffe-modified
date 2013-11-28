@@ -832,7 +832,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         }
 
         var range = config.max - config.min;
-        config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+        config.yellowZones = [{ from: config.min + range*0.80, to: config.min + range*0.9 }];
         config.redZones = [{ from: config.min + range*0.9, to: config.max }];
 
         var gauge = new Gauge(anchor, config);
@@ -847,11 +847,10 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
                 value = series[0].data[k].y
                 if(value!=null){
             //        console.log("at "+k+" find "+value)
-
                     break;
                 }
             }
-            gauge.redraw(value);
+             gauge.redraw(value);
     },
 
     render : function(series) {
@@ -860,7 +859,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         var id = "#gauge-"+this.params.anchor.replace("#","")
         var svgid = "#gauge-"+id.replace("#","")
 
-//        console.log($(svgid).length)
+        console.log($(svgid).length)
         if(!$(svgid).length>0) {
             this._gauge = this.gaugeFactory(this.params.size,id,this.params.alias);
 

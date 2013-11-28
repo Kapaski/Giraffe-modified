@@ -3,7 +3,7 @@
    ========================================================================== */
 
 body {
-    background: url("../img/_giraffe-bg.png") fixed center center;
+    background: #eaeaea;
     padding-top: 40px;
     padding-bottom: 0;
 }
@@ -24,16 +24,21 @@ body > .container {
      -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
           box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
 }
-
+.navbar .navbar-inverse .nav-collapse .navbar-form,
+.navbar-inverse .nav-collapse .navbar-search {
+    background-color: #d65100;
+    border-top-color: #d65100;
+    border-bottom-color: #d65100;
+}
 .navbar .brand {
   /* color: #d65100; */
-  color: white;
+  color: #537fd6;
   text-shadow: none;
 }
 
 .navbar .brand:hover {
   text-decoration: none;
-  color: white;
+  color: #d65100;
 }
 
 .navbar .nav > li > a {
@@ -50,7 +55,7 @@ body > .container {
 }
 
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
-    border-top-color: white;
+    border-top-color: #d65100;
     border-bottom-color: white;
 }
 
@@ -59,16 +64,16 @@ body > .container {
 }
 
 .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-    color: #d65100;
-    background-color: white;
+    color: #537fd6;
+    background-color: #f8ffff;
 }
 
 .btn-small, .btn-small.active {
-    color: #d65100;
+    color: #537fd6;
 }
 
 .page-header h1 {
-    color: #d65100;
+    color: #537fd6;
 }
 
 h2 {
@@ -76,7 +81,7 @@ h2 {
 }
 
 h2, h3 {
-    color: #9a5f00;
+    color: #d65100;
 }
 
 .page-header {
@@ -111,3 +116,9 @@ h2, h3 {
 /*     opacity:1; */
 /*     display: none; */
 /* } */
+.gauges {
+    background-color: #d8d8d8;
+}
+.offsetgauge {
+    margin-left: auto;
+}

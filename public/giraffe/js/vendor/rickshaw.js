@@ -1,3 +1,7 @@
+/*
+* This file has been modified, don't use the src/coffeejs script to regenerate this file!
+*/
+
 var Rickshaw = {
 
 	namespace: function(namespace, obj) {
@@ -935,8 +939,10 @@ Rickshaw.Fixtures.Time = function() {
 	};
 
 	this.formatTime = function(d) {
-		return d.toUTCString().match(/(\d+:\d+):/)[1];
-	};
+//		return d.toUTCString().match(/(\d+:\d+):/)[1];
+        return d.toLocaleString()//.match(/(\d+:\d+):/)[1];
+
+    };
 
 	this.ceil = function(time, unit) {
 
@@ -1365,9 +1371,92 @@ Rickshaw.Graph.Annotate = function(args) {
 };
 Rickshaw.namespace('Rickshaw.Graph.Axis.Time');
 
-Rickshaw.Graph.Axis.Time = function(args) {
+//Rickshaw.Graph.Axis.Time = function(args) {
+//
+//    var self = this;
+//
+//    this.graph = args.graph;
+//    this.elements = [];
+//    this.ticksTreatment = args.ticksTreatment || 'plain';
+//    this.fixedTimeUnit = args.timeUnit;
+//    this.tzOffset = args.tzOffset || 0;
+//
+//    //ning
+//    this.tzOffset = new Date().getTimezoneOffset() * 60;
+//
+//    var time = new Rickshaw.Fixtures.Time();
+//
+//    this.appropriateTimeUnit = function() {
+//
+//        var unit;
+//        var units = time.units;
+//
+//        var domain = this.graph.x.domain();
+//        var rangeSeconds = domain[1] - domain[0];
+//
+//        units.forEach( function(u) {
+//            if (Math.floor(rangeSeconds / u.seconds) >= 2) {
+//                unit = unit || u;
+//            }
+//        } );
+//
+//        return (unit || time.units[time.units.length - 1]);
+//    };
+//
+//    this.tickOffsets = function() {
+//
+//        var domain = this.graph.x.domain();
+//
+//        var unit = this.fixedTimeUnit || this.appropriateTimeUnit();
+//        var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
+//        var runningTick = domain[0] + this.tzOffset;
+//
+//        var offsets = [];
+//
+//        for (var i = 0; i < count; i++) {
+//            var tickValue = time.ceil(runningTick + 1, unit)
+//            runningTick = tickValue + unit.seconds / 2;
+//
+//            offsets.push( { value: tickValue - this.tzOffset, unit: unit } );
+//        }
+//
+//        return offsets;
+//    };
+//
+//    this.render = function() {
+//
+//        this.elements.forEach( function(e) {
+//            e.parentNode.removeChild(e);
+//        } );
+//
+//        this.elements = [];
+//
+//        var offsets = this.tickOffsets();
+//
+//        offsets.forEach( function(o) {
+//            if (self.graph.x(o.value) > self.graph.x.range()[1]) return;
+//
+//            var element = document.createElement('div');
+//            element.style.left = self.graph.x(o.value) + 'px';
+//            element.classList.add('x_tick');
+//            element.classList.add(self.ticksTreatment);
+//
+//            var title = document.createElement('div');
+//            title.classList.add('title');
+//            title.innerHTML = o.unit.formatter(new Date(o.value * 1000));
+//            element.appendChild(title);
+//
+//            self.graph.element.appendChild(element);
+//            self.elements.push(element);
+//
+//        } );
+//    };
+//
+//    this.graph.onUpdate( function() { self.render() } );
+//};
 
-	var self = this;
+Rickshaw.Graph.Axis.Time = function(args) {
+    var self = this;
 
 	this.graph = args.graph;
 	this.elements = [];
@@ -1426,9 +1515,9 @@ Rickshaw.Graph.Axis.Time = function(args) {
 		var offsets = this.tickOffsets();
 
 		offsets.forEach( function(o) {
-			
+
 			if (self.graph.x(o.value) > self.graph.x.range()[1]) return;
-	
+
 			var element = document.createElement('div');
 			element.style.left = self.graph.x(o.value) + 'px';
 			element.classList.add('x_tick');
@@ -1437,6 +1526,7 @@ Rickshaw.Graph.Axis.Time = function(args) {
 			var title = document.createElement('div');
 			title.classList.add('title');
 			title.innerHTML = o.unit.formatter(new Date(o.value * 1000));
+            console.log(o)
 			element.appendChild(title);
 
 			self.graph.element.appendChild(element);
@@ -1451,8 +1541,7 @@ Rickshaw.Graph.Axis.Time = function(args) {
 Rickshaw.namespace('Rickshaw.Graph.Axis.X');
 
 Rickshaw.Graph.Axis.X = function(args) {
-
-	var self = this;
+    var self = this;
 	var berthRate = 0.10;
 
 	this.initialize = function(args) {
@@ -1996,8 +2085,11 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 		var graph = this.graph = args.graph;
 
 		this.xFormatter = args.xFormatter || function(x) {
-			return new Date( x * 1000 ).toUTCString();
-		};
+            console.log(new Date(x*1000))
+//			return new Date( x * 1000 ).toUTCString();
+            return new Date( x * 1000 ).toLocaleString();
+
+        };
 
 		this.yFormatter = args.yFormatter || function(y) {
 			return y === null ? y : y.toFixed(2);
