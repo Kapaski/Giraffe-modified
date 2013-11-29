@@ -2,7 +2,7 @@ var graphite_url = "http://10.5.250.45:8080";  // enter your graphite url, e.g. 
 
 var dashboards =
     [
-        { "name": "SPS Overal Metrics",  // give your dashboard a name (required!)
+        { "name": "SPS Overall Metrics",  // give your dashboard a name (required!)
             "refresh": 5000,  // each dashboard has its own refresh interval (in ms)
             // add an (optional) dashboard description. description can be written in markdown / html.
             "description": "\n###Overal system health metrics"
@@ -42,7 +42,7 @@ var dashboards =
                 [
                     {
                         "alias": "10_5_250_45.memory",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
+                        "target": "10_5_250_45.memory.*",  // enter your graphite barebone target expression here
                         "description": "The diagram indicates how much memeory left available", // enter your metric description here
                         "renderer": "line",
                         "interpolation": "cardinal",
@@ -53,7 +53,6 @@ var dashboards =
                         "target": "10_5_250_45.memory.available_memory",  // enter your graphite barebone target expression here
                         "description": "", // enter your metric description here
                         "renderer": "bar",
-                        "summary": "last",
                         "colspan" : 2
                     },
                     {

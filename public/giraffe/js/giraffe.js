@@ -167,7 +167,7 @@ graphScaffold = function() {
             "<p><b>{{metric_alias}} </b><span class=\"pull-right graph-summary\"><span></p>\n" +
             "<div class=\"chart\" id=\"{{graph_renderer}}-graph-{{graph_id}}\"></div>\n      " +
             "<div class=\"timeline\"></div>\n      <p>{{metric_description}}</p>\n      <div class=\"legend\"></div>\n" +
-            " <hr width=80% size=1 color=#00ffff style='border:1 dashed #00ffff'>\n" +
+            " <hr width=100% size=1 color=#00ffff style='border:1 dashed #00ffff'>\n" +
         "</div>\n  {{#end_row}}\n  </div>\n  " +
       "{{/end_row}}\n{{/metrics}}";
   $('#graphs').empty();
@@ -344,7 +344,8 @@ createGraph = function(anchor, metric) {
       graph = transport.graph;
       xAxis = new Rickshaw.Graph.Axis.Time({
         graph: graph,
-        fixedTimeUnit:"YYYY-dd"
+        timeUnit: "day"
+
       });
       xAxis.render();
       yAxis = new Rickshaw.Graph.Axis.Y({
