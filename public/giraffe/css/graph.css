@@ -30,7 +30,7 @@
 	position: absolute;
 	font-size: 12px;
 	font-family: Arial, sans-serif;
-	opacity: 0.5;
+	opacity: 0.8;
 	white-space: nowrap;
 	margin-left: 3px;
 	bottom: .05em;
@@ -144,9 +144,10 @@
 	stroke: #808080;
 }
 .rickshaw_graph .y_ticks text {
-	opacity: 0.5;
+	opacity: 0.8;
 	font-size: 12px;
 	pointer-events: none;
+
 }
 .rickshaw_graph .x_tick.glow .title,
 .rickshaw_graph .y_ticks.glow text {

@@ -859,7 +859,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         var id = "#gauge-"+this.params.anchor.replace("#","")
         var svgid = "#gauge-"+id.replace("#","")
 
-        console.log($(svgid).length)
+        //console.log($(svgid).length)
         if(!$(svgid).length>0) {
             this._gauge = this.gaugeFactory(this.params.size,id,this.params.alias);
 

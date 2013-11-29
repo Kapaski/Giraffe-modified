@@ -46,6 +46,7 @@ var dashboards =
                         "description": "The diagram indicates how much memeory left available", // enter your metric description here
                         "renderer": "line",
                         "interpolation": "cardinal",
+                        "height" : 150,
                         "colspan" : 3
                     },
                     {

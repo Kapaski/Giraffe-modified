@@ -343,8 +343,7 @@ createGraph = function(anchor, metric) {
       var detail, hover_formatter, shelving, xAxis, yAxis;
       graph = transport.graph;
       xAxis = new Rickshaw.Graph.Axis.Time({
-        graph: graph,
-        timeUnit: "day"
+        graph: graph
 
       });
       xAxis.render();

@@ -931,18 +931,22 @@ Rickshaw.Fixtures.Time = function() {
 	];
 
 	this.unit = function(unitName) {
-		return this.units.filter( function(unit) { return unitName == unit.name } ).shift();
+		return this.units.filter( function(unit) { console.log(unit); return unitName == unit.name } ).shift();
 	};
 
 	this.formatDate = function(d) {
+        console.log("formatTime")
 		return d3.time.format('%b %e')(d);
 	};
 
 	this.formatTime = function(d) {
 //		return d.toUTCString().match(/(\d+:\d+):/)[1];
-        return d.toLocaleString()//.match(/(\d+:\d+):/)[1];
+        var ds = moment(d).format("Do MMM hA")
+        return ds//.match(/(\d+:\d+):/)[1];
 
     };
+
+
 
 	this.ceil = function(time, unit) {
 
@@ -1487,6 +1491,7 @@ Rickshaw.Graph.Axis.Time = function(args) {
 		var domain = this.graph.x.domain();
 
 		var unit = this.fixedTimeUnit || this.appropriateTimeUnit();
+        console.log(unit)
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
 		var runningTick = domain[0];
@@ -1742,6 +1747,7 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 
 		if (this.orientation == 'left') {
 			var berth = this.height * this.berthRate;
+
 			var transform = 'translate(' + this.width + ', ' + berth + ')';
 		}
 
@@ -1749,11 +1755,16 @@ Rickshaw.Graph.Axis.Y = Rickshaw.Class.create( {
 			this.vis.selectAll('*').remove();
 		}
 
-		this.vis
+		var ax = this.vis
 			.append("svg:g")
 			.attr("class", ["y_ticks", this.ticksTreatment].join(" "))
 			.attr("transform", transform)
-			.call(axis.ticks(this.ticks).tickSubdivide(0).tickSize(this.tickSize));
+			.call(axis.ticks(this.ticks).tickSubdivide(5).tickSize(this.tickSize))
+
+        //Move all Y axis number up for half step for better display
+        ax.selectAll("text")
+            .attr("dy","-.35em")
+
 
 		return axis;
 	},
@@ -2084,7 +2095,6 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 		var graph = this.graph = args.graph;
 
 		this.xFormatter = args.xFormatter || function(x) {
-            console.log(new Date(x*1000))
 //			return new Date( x * 1000 ).toUTCString();
             return new Date( x * 1000 ).toLocaleString();
 
