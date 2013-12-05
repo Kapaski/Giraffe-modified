@@ -10,9 +10,10 @@
 
 .Visuals_graph {
     position: relative;
+    text-align: center;
 }
 .Visuals_graph svg {
-    display: block;
+    /*display: block;*/
     overflow: hidden;
 }
 

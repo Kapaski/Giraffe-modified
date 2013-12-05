@@ -21,12 +21,12 @@
 	font-family: Arial, sans-serif;
 	border-radius: 3px;
 	padding: 4px;
-	opacity: 0.5;
-	border: 1px solid #e0e0e0;
+	opacity: 0.8;
+	border: 1px solid #537fd6;
 	font-size: 12px;
 	position: absolute;
 	background: white;
-	white-space: nowrap;
+	/*white-space: nowrap;*/
     top: -73px;
 }
 .rickshaw_graph .detail .item {
@@ -38,7 +38,7 @@
 	font-family: Arial, sans-serif;
 	opacity: 0;
 	background: rgba(0, 0, 0, 0.4);
-	color: white;
+	color: #f8ffff;
 	border: 1px solid rgba(0, 0, 0, 0.4);
 	margin-left: 1em;
 	margin-top: -1em;

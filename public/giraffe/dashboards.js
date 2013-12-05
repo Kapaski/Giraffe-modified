@@ -1,38 +1,152 @@
 var graphite_url = "http://10.5.250.45:8080";  // enter your graphite url, e.g. http://your.graphite.com
-
 var dashboards =
     [
-        { "name": "SPS Overall Metrics",  // give your dashboard a name (required!)
+        { "name": "SPS Server Metrics",
+            "refresh": 5000,
+            // you can use any rickshaw supported color scheme.
+            // Enter palette name as string, or an array of colors
+            // (see var scheme at the bottom).
+            // Schemes can be configured globally (see below), per-dashboard, or per-metric
+            //"scheme": "colorwheel",   // this is a dashboard-specific color palette
+            "description": "\n###Monitoring Windows Environment Performance"
+                + "\n ",
+            "gauges" :
+                [
+                    {
+                        "alias": "% Processor Time",  // display name for this metric
+                        "target": "servers.127_0_0_1_20001.serverLocal.Processor.ProcessorTimePercent",  // enter your graphite barebone target expression here
+                        "description": "",  // enter your metric description here
+                        "renderer": "gauge",
+                        "size": 150, //currently for gauge only
+                        "width":280,
+                        "Formatter":"none"
+                    },
+                    {
+                        "alias": "% Memory Commited",  // display name for this metric
+                        "target": "servers.127_0_0_1_20001.serverLocal.memory.CommittedPercent",  // enter your graphite barebone target expression here
+                        "description": "",  // enter your metric description here
+                        "renderer": "gauge",
+                        "size": 150, //currently for gauge only
+                        "width":200,
+                        "Formatter":"none"
+                    }
+
+
+                ],
+            "metrics": [
+
+                {
+                    "alias": "cpu utilization %",
+                    "target": "servers.127_0_0_1_20001.serverLocal.Processor.*",  // target can use any graphite-supported wildcards
+                    //"annotator": 'events.deployment',  // a simple annotator will track a graphite event and mark it as 'deployment'.
+                    // enter your graphite target as a string
+                    "description": "cpu utilization revealed from both Processor Time % and Priviledged Time %. Higher % means slower performance",
+                    "interpolation": "linear",  // you can use different rickshaw interpolation values
+                    "stroke_width": 1 , // change stroke width
+                    "height" : 200,
+                    "renderer": "line",
+                    "colspan" : 2
+
+                },
+                {
+                    "alias": "available memory",
+                    "target": "absolute(scale(servers.127_0_0_1_20001.serverLocal.memory.AvailableMemoryKb,1))",  // enter your graphite barebone target expression here
+
+                    "description": "available memeory", // enter your metric description here
+                    "renderer": "area",
+                    "interpolation": "cardinal",
+                    "summaryFormatterName" : "MGTP",
+                    "legendFormatterName" : "MGTP",
+                    "yFormatterName" : "MGTP",
+                    "height" : 200,
+                    "colspan": 1
+
+                },
+                {
+                    "alias": "physical disk IO rate",
+                    "target" : "servers.127_0_0_1_20001.serverLocal.Disk.PhysicalDisk.*",
+//                    "targets": ["aliasByNode(derivative(servers.system.cpu.user),4)",  // targets array can include strings,
+//                        // functions or dictionaries
+//                        {target: 'alias(derivative(servers.system.cpu.system,"system utilization")',
+//                            alias: 'system utilization',                           // if you use a graphite alias, specify it here
+//                            color: '#f00'}],                                       // you can also specify a target color this way
+                    // (note that these values are ignored on the demo)
+                    // annotator can also be a dictionary of target and description.
+                    // However, only one annotator is supported per-metric.
+//                    "annotator": {'target': 'events.deployment',
+//                        'description': 'deploy'},
+                    "renderer": "line",
+                    "description": "Read/Write IO per sec for Physical Disks",
+                    "interpolation": "step-before",
+                    "colspan": 1,
+                    "height" : 200,
+                    "scheme": "munin"  // this is a metric-specific color palette
+                },
+                {
+                    "alias": "logical disk IO rate",
+                    "target" : "servers.127_0_0_1_20001.serverLocal.Disk.LogicalDisk.*",
+//                    "targets": ["aliasByNode(derivative(servers.system.cpu.user),4)",  // targets array can include strings,
+//                        // functions or dictionaries
+//                        {target: 'alias(derivative(servers.system.cpu.system,"system utilization")',
+//                            alias: 'system utilization',                           // if you use a graphite alias, specify it here
+//                            color: '#f00'}],                                       // you can also specify a target color this way
+                    // (note that these values are ignored on the demo)
+                    // annotator can also be a dictionary of target and description.
+                    // However, only one annotator is supported per-metric.
+//                    "annotator": {'target': 'events.deployment',
+//                        'description': 'deploy'},
+                    "renderer": "line",
+                    "description": "Read/Write IO per sec for Logical Disks",
+                    "interpolation": "step-before",
+                    "colspan": 1,
+                    "height" : 200,
+                    "scheme": "munin"  // this is a metric-specific color palette
+                },
+                {
+                    "alias": "network",
+                    "target": "servers.127_0_0_1_20001.serverLocal.Network.BytesTotal",
+                    "events": "*",  // instead of annotator, if you use the graphite events feature
+                    // you can retrieve events matching specific tag(s) -- space separated
+                    // or use * for all tags. Note you cannot use both annotator and events.
+                    "renderer": "line",
+                    "description": "Network IO performance",
+                    "interpolation": "linear",
+                    "height" : 200,
+                    "colspan": 1
+                }
+
+                   // instead of annotator, if you use the graphite events feature
+                    // you can retrieve events matching specific tag(s) -- space separated
+                    // or use * for all tags. Note you cannot use both annotator and events.
+            ]
+
+        },
+        { "name": "SPS ESB Metrics",  // give your dashboard a name (required!)
             "refresh": 5000,  // each dashboard has its own refresh interval (in ms)
             // add an (optional) dashboard description. description can be written in markdown / html.
-            "description": "\n###Overal system health metrics"
-                + "\n Showing host performance data"
+            //"scheme": "colorwheel",
+            "description": "\n###ESB system health metrics"
+                + "\n Monitoring ActiveMQ and ESB (Currently ActiveMQ on localhost)"
                 + "\n",
             "gauges" :
                 [
                     {
-                        "alias": "% memory used",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
+                        "alias": "%  ActiveMQ heap memory used",  // display name for this metric
+                        "target": "divideSeries(servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_used,servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_init)",  // enter your graphite barebone target expression here
                         "description": "",  // enter your metric description here
                         "renderer": "gauge",
                         "size": 150, //currently for gauge only
-                        "width":280
+                        "width":280,
+                        "Formatter":"percent"
                     },
                     {
-                        "alias": "% memory used",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
+                        "alias": "% ActiveMQ Thread used",  // display name for this metric
+                        "target": "divideSeries(servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.ThreadCount,servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.TotalStartedThreadCount)",  // enter your graphite barebone target expression here
                         "description": "",  // enter your metric description here
                         "renderer": "gauge",
                         "size": 150, //currently for gauge only
-                        "width":200
-                    },
-                    {
-                        "alias": "% memory used",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
-                        "description": "",  // enter your metric description here
-                        "renderer": "gauge",
-                        "size": 150, //currently for gauge only
-                        "width":200
+                        "width":200,
+                        "Formatter":"percent"
 
                     }
 
@@ -41,111 +155,154 @@ var dashboards =
             "metrics":  // metrics is an array of charts on the dashboard
                 [
                     {
-                        "alias": "10_5_250_45.memory",  // display name for this metric
-                        "target": "10_5_250_45.memory.*",  // enter your graphite barebone target expression here
-                        "description": "The diagram indicates how much memeory left available", // enter your metric description here
-                        "renderer": "line",
-                        "interpolation": "cardinal",
-                        "height" : 150,
-                        "colspan" : 3
-                    },
-                    {
-                        "alias": "10_5_250_45.memory",  // display name for this metric
-                        "target": "10_5_250_45.memory.available_memory",  // enter your graphite barebone target expression here
+                        "alias": "10_5_250_45.login.count",  // display name for this metric
+                        "target": "derivative(servers.127_0_0_1_20001.serverLocal.ActiveMQ.queues_temp.panviva_dev_supportpoint_public_security_login_request_1.EnqueueCount)",  // enter your graphite barebone target expression here
                         "description": "", // enter your metric description here
-                        "renderer": "bar",
-                        "colspan" : 2
+                        "renderer": "line",
+                        "interpolation": "linear",
+                        "height" : 200,
+                        "colspan" : 3,
+                        "summary" : "per_minute",
+                        "summaryFormatterName" : "Raw"
+
                     },
                     {
-                        "alias": "10_5_250_45.memory",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
+                        "alias": "10_5_250_45.overal ActiveMQ Queue Metrics",  // display name for this metric
+                        "targets": [
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.queues_total.TotalMessageCount",
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.queues_total.TotalDequeueCount",
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.queues_total.TotalEnqueueCount"
+                        ],
+                        "description": "The diagram indicates ActiveMQ total message counts in status", // enter your metric description here
+                        "renderer": "line",
+                        "interpolation":"linear",
+                        "height" : 200,
+                        "colspan" : 3,
+                        "summaryFormatterName" : "KMBT", //Currently has 3 types of formatter KMGTP/KMBT/Raw
+                        "legendFormatterName" : "KMBT",
+                        "yFormatterName" : "KMBT"
+
+                    },
+
+                    {
+                        "alias": "10_5_250_45.threads",  // display name for this metric
+                        "target": "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.*",  // enter your graphite barebone target expression here
+                        "description": "The diagram indicates ActiveMQ threads usages", // enter your metric description here
+                        "renderer": "bar",
+
+                        "height" : 200,
+                        "colspan" : 2,
+                        "summaryFormatterName" : "KMBT",
+                        "legendFormatterName" : "KMBT",
+                        "yFormatterName" : "KMBT"
+                    },
+                    {
+                        "alias": "10_5_250_45.jvm.memory",  // display name for this metric
+                        "targets": ["servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_init",
+                                    "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_used",
+                                    "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_committed"
+                        ],  // enter your graphite barebone target expression here
 
                         "description": "", // enter your metric description here
-                        "renderer": "line"
-                    },
-                    {
-                        "alias": "10_5_250_45.memory",  // display name for this metric
-                        "target": "10_5_250_45.memory.committed_percent",  // enter your graphite barebone target expression here
-                        "description": "", // enter your metric description here
-                        "renderer": "line"
+                        "renderer": "line",
+                        "height" : 200,
+                        "summaryFormatterName" : "KMGTP",
+                        "legendFormatterName" : "KMGTP",
+                        "yFormatterName" : "KMGTP"
                     }
                 ]
         },
-        { "name": "SPS ESB Metrics",
+
+        { "name": "SPS Overall Metrics",
             "refresh": 10000,
-            // you can use any rickshaw supported color scheme.
-            // Enter palette name as string, or an array of colors
-            // (see var scheme at the bottom).
-            // Schemes can be configured globally (see below), per-dashboard, or per-metric
-            "scheme": "classic9",   // this is a dashboard-specific color palette
-            "description": "###Description goes here"
-                + "\n ",
+            "scheme": "spectrum2001",
             "metrics": [
+
                 {
-                    "alias": "network",
-                    "target": "aliasByNode(derivative(servers.system.eth*),4)",
-                    "events": "*",  // instead of annotator, if you use the graphite events feature
-                    // you can retrieve events matching specific tag(s) -- space separated
-                    // or use * for all tags. Note you cannot use both annotator and events.
-                    "description": "main system cpu usage on production (cardinal interpolation, line renderer, colspan=3)",
-                    "interpolation": "linear",
-                    "colspan": 3
-                },
-                {
-                    "alias": "cpu utilization",
-                    "target": "aliasByNode(derivative(servers.system.cpu.*),4)",  // target can use any graphite-supported wildcards
-                    "annotator": 'events.deployment',  // a simple annotator will track a graphite event and mark it as 'deployment'.
+                    "alias": "cpu utilization %",
+                    "target": "servers.127_0_0_1_20001.serverLocal.Processor.*",  // target can use any graphite-supported wildcards
+                    //"annotator": 'events.deployment',  // a simple annotator will track a graphite event and mark it as 'deployment'.
                     // enter your graphite target as a string
-                    "description": "cpu utilization on production (using linear interpolation). Summary displays the average across all series",
+                    "description": "cpu utilization revealed from both Processor Time % and Priviledged Time %. Higher % means slower performance",
                     "interpolation": "linear",  // you can use different rickshaw interpolation values
-                    "stroke_width": 1,  // change stroke width
-                    "summary": "avg"
+                    "stroke_width": 1 , // change stroke width
+                    "height" : 300,
+                    "renderer": "gauge",
+                    "colspan" : 1
+
                 },
                 {
-                    "alias": "proc mem prod",
-                    "targets": ["aliasByNode(derivative(servers.system.cpu.user),4)",  // targets array can include strings,
-                        // functions or dictionaries
-                        {target: 'alias(derivative(servers.system.cpu.system,"system utilization")',
-                            alias: 'system utilization',                           // if you use a graphite alias, specify it here
-                            color: '#f00'}],                                       // you can also specify a target color this way
+                    "alias": "available memory",
+                    "target": "absolute(scale(servers.127_0_0_1_20001.serverLocal.memory.AvailableMemoryKb,1))",  // enter your graphite barebone target expression here
+
+                    "description": "available memeory", // enter your metric description here
+                    "renderer": "area",
+                    "interpolation": "cardinal",
+                    "summaryFormatterName" : "MGTP",
+                    "legendFormatterName" : "MGTP",
+                    "yFormatterName" : "MGTP",
+                    "height" : 200,
+                    "colspan": 2
+
+                },
+                {
+                    "alias": "physical disk IO rate",
+                    "target" : "servers.127_0_0_1_20001.serverLocal.Disk.PhysicalDisk.*",
+//                    "targets": ["aliasByNode(derivative(servers.system.cpu.user),4)",  // targets array can include strings,
+//                        // functions or dictionaries
+//                        {target: 'alias(derivative(servers.system.cpu.system,"system utilization")',
+//                            alias: 'system utilization',                           // if you use a graphite alias, specify it here
+//                            color: '#f00'}],                                       // you can also specify a target color this way
                     // (note that these values are ignored on the demo)
                     // annotator can also be a dictionary of target and description.
                     // However, only one annotator is supported per-metric.
-                    "annotator": {'target': 'events.deployment',
-                        'description': 'deploy'},
-                    "description": "main process memory usage on production (different colour scheme and interpolation)",
+//                    "annotator": {'target': 'events.deployment',
+//                        'description': 'deploy'},
+                    "renderer": "line",
+                    "description": "Read/Write IO per sec for Physical Disks",
                     "interpolation": "step-before",
+                    "colspan": 1,
+                    "height" : 200,
                     "scheme": "munin"  // this is a metric-specific color palette
                 },
                 {
-                    "alias": "sys mem prod",
-                    "target": "derivative(localhost.memory.*)",
+                    "alias": "logical disk IO rate",
+                    "target" : "servers.127_0_0_1_20001.serverLocal.Disk.LogicalDisk.*",
+//                    "targets": ["aliasByNode(derivative(servers.system.cpu.user),4)",  // targets array can include strings,
+//                        // functions or dictionaries
+//                        {target: 'alias(derivative(servers.system.cpu.system,"system utilization")',
+//                            alias: 'system utilization',                           // if you use a graphite alias, specify it here
+//                            color: '#f00'}],                                       // you can also specify a target color this way
+                    // (note that these values are ignored on the demo)
+                    // annotator can also be a dictionary of target and description.
+                    // However, only one annotator is supported per-metric.
+//                    "annotator": {'target': 'events.deployment',
+//                        'description': 'deploy'},
+                    "renderer": "line",
+                    "description": "Read/Write IO per sec for Logical Disks",
+                    "interpolation": "step-before",
+                    "colspan": 1,
+                    "height" : 200,
+                    "scheme": "munin"  // this is a metric-specific color palette
+                },
+                {
+                    "alias": "network",
+                    "target": "servers.127_0_0_1_20001.serverLocal.Network.BytesTotal",
                     "events": "*",  // instead of annotator, if you use the graphite events feature
                     // you can retrieve events matching specific tag(s) -- space separated
                     // or use * for all tags. Note you cannot use both annotator and events.
-                    "description": "main system memory usage on production (cardinal interpolation, line renderer)",
-                    "interpolation": "cardinal",
                     "renderer": "line",
-                    "max": 150,  // you can specify max value for the y-axis
-                    "min": 20   // and also min
+                    "description": "Network IO performance",
+                    "interpolation": "linear",
+                    "height" : 200,
+                    "colspan": 1
                 }
+
+                // instead of annotator, if you use the graphite events feature
+                // you can retrieve events matching specific tag(s) -- space separated
+                // or use * for all tags. Note you cannot use both annotator and events.
             ]
-        },
-        { "name": "SPS IOL Metrics",
-            "refresh": 10000,
-            "scheme": "colorwheel",
-            "graphite_url": "demo",  // you can override the default graphite_url with a dashboard-specific url
-            "description": "###Description goes here"
-                + "\n",
-            "metrics": [
-                {
-                    "alias": "production HTTP req",
-                    "target": "aliasByNode(derivative(servers.gluteus-medius.Http.http_response_rates.*),4)",
-                    "renderer": "bar",
-                    "interpolation": "cardinal",
-                    "summary": "last"
-                }
-            ]
+
         }
     ];
 

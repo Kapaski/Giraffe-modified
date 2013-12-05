@@ -36,10 +36,11 @@ function Gauge(placeholderName, configuration)
     {
         this.body = d3.select(this.placeholderName)
             .append("svg:svg")
-            .attr("class", "gauge")
+            .attr("class", "gauges")
             .attr("id", "gauge-"+this.placeholderName.replace("#",""))
             .attr("width", this.config.size)
             .attr("height", this.config.size);
+
 
         this.body.append("svg:circle")
             .attr("cx", this.config.cx)
@@ -80,7 +81,7 @@ function Gauge(placeholderName, configuration)
                 .attr("y", this.config.cy / 2 + fontSize / 2)
                 .attr("dy", fontSize / 2)
                 .attr("text-anchor", "middle")
-                .text(this.config.label)
+                //.text(this.config.label)
                 .style("font-size", fontSize + "px")
                 .style("fill", "#333")
                 .style("stroke-width", "0px");

@@ -75,7 +75,7 @@ if (typeof module !== 'undefined' && module.exports) {
     /* ------------------------------------ */
     /* Import from object.js                */
     /* ------------------------------------ */
-    console.log(globalContext)
+    //console.log(globalContext)
     var _toString = Object.prototype.toString,
         NULL_TYPE = 'Null',
         UNDEFINED_TYPE = 'Undefined',
@@ -808,7 +808,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
 
     name: 'gauge',
 
-    _gauge : {},
+    _gauge :  {},
 
     defaults:  function(){
            return{
@@ -819,6 +819,28 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
     },
     seriesPathFactory: {},
 
+    _switchFormatter : function(formatterName) {
+        switch(formatterName) {
+            case "percent":
+                return this._percentFormatter;
+                break
+
+            default:
+                return this._noneFormatter;
+                break
+        }
+    },
+    _percentFormatter : function(d) {
+        if(d===null || d === 'undefined') return 0;
+        return (d*100).toFixed(2);
+
+    },
+
+    _noneFormatter : function(d) {
+        return d;
+    },
+
+
     gaugeFactory : function(size, anchor, label, min, max){
         //console.log(anchor)
 
@@ -828,7 +850,8 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
             label: label,
             min: undefined != min ? min : 0,
             max: undefined != max ? max : 100,
-            minorTicks: 5
+            minorTicks: 5,
+            majorTicks:10
         }
 
         var range = config.max - config.min;
@@ -840,17 +863,25 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         return gauge;
     },
 
-    updateGauges : function(gauge, series){
+    updateGauges : function(gauge, series,formatter){
 
             var value;
             for(var k = (series[0].data.length-1); k>=0; k--) {
                 value = series[0].data[k].y
                 if(value!=null){
-            //        console.log("at "+k+" find "+value)
+                    console.log("at "+k+" find "+value)
                     break;
+
                 }
             }
-             gauge.redraw(value);
+            //console.log(gauge)
+
+            if (value!=null) {
+                var v = formatter(value)
+                gauge.redraw(v)
+            };
+
+
     },
 
     render : function(series) {
@@ -858,13 +889,14 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
 
         var id = "#gauge-"+this.params.anchor.replace("#","")
         var svgid = "#gauge-"+id.replace("#","")
-
         //console.log($(svgid).length)
         if(!$(svgid).length>0) {
             this._gauge = this.gaugeFactory(this.params.size,id,this.params.alias);
-
         } else {
-           this.updateGauges(this._gauge,series)
+            var formatterName = this.params.Formatter || "none"
+            console.log(formatterName)
+            var formatter = this._switchFormatter(formatterName)
+            this.updateGauges(this._gauge,series,formatter)
         }
 
     }

@@ -935,13 +935,13 @@ Rickshaw.Fixtures.Time = function() {
 	};
 
 	this.formatDate = function(d) {
-        console.log("formatTime")
+
 		return d3.time.format('%b %e')(d);
 	};
 
 	this.formatTime = function(d) {
 //		return d.toUTCString().match(/(\d+:\d+):/)[1];
-        var ds = moment(d).format("Do MMM hA")
+        var ds = moment(d).format("D MMM hA")
         return ds//.match(/(\d+:\d+):/)[1];
 
     };
@@ -1491,7 +1491,7 @@ Rickshaw.Graph.Axis.Time = function(args) {
 		var domain = this.graph.x.domain();
 
 		var unit = this.fixedTimeUnit || this.appropriateTimeUnit();
-        console.log(unit)
+        //console.log(unit)
 		var count = Math.ceil((domain[1] - domain[0]) / unit.seconds);
 
 		var runningTick = domain[0];
@@ -2101,6 +2101,7 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
         };
 
 		this.yFormatter = args.yFormatter || function(y) {
+
 			return y === null ? y : y.toFixed(2);
 		};
 
@@ -2122,7 +2123,12 @@ Rickshaw.Graph.HoverDetail = Rickshaw.Class.create({
 	},
 
 	formatter: function(series, x, y, formattedX, formattedY, d) {
-		return series.name + ':&nbsp;' + formattedY;
+		//return series.name + ':&nbsp;' + formattedY;
+        var names= series.name.split(".")
+        var i = names.length-1<0?0:(names.length-1)
+        var name = names[i]//.replaceAll(")","")
+        //console.log(name)
+        return name!=null? name.split(")").join("").split(",")[0] +'<br/>'+ formattedY:formattedY;
 	},
 
 	update: function(e) {
