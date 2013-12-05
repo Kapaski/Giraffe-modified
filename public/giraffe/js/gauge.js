@@ -11,7 +11,7 @@ function Gauge(placeholderName, configuration)
     this.configure = function(configuration)
     {
         this.config = configuration;
-
+        //console.log(configuration)
         this.config.size = this.config.size * 0.9;
 
         this.config.raduis = this.config.size * 0.97 / 2;
@@ -28,7 +28,7 @@ function Gauge(placeholderName, configuration)
         this.config.greenColor 	= configuration.greenColor || "#109618";
         this.config.yellowColor = configuration.yellowColor || "#FF9900";
         this.config.redColor 	= configuration.redColor || "#DC3912";
-
+        this.config.threshold = configuration.threshold
         this.config.transitionDuration = configuration.transitionDuration || 500;
     }
 
@@ -50,7 +50,7 @@ function Gauge(placeholderName, configuration)
             .style("stroke", "#000")
             .style("stroke-width", "0.5px");
 
-        this.body.append("svg:circle")
+        this.face = this.body.append("svg:circle")
             .attr("cx", this.config.cx)
             .attr("cy", this.config.cy)
             .attr("r", 0.9 * this.config.raduis)
@@ -88,7 +88,7 @@ function Gauge(placeholderName, configuration)
         }
 
         var fontSize = Math.round(this.config.size / 16);
-        var majorDelta = this.config.range / (this.config.majorTicks - 1);
+        var majorDelta = this.config.range / (this.config.majorTicks)//this.config.range / (this.config.majorTicks - 1);
         for (var major = this.config.min; major <= this.config.max; major += majorDelta)
         {
             var minorDelta = majorDelta / this.config.minorTicks;
@@ -235,13 +235,23 @@ function Gauge(placeholderName, configuration)
                 var targetRotation = (self.valueToDegrees(pointerValue) - 90);
                 var currentRotation = self._currentRotation || targetRotation;
                 self._currentRotation = targetRotation;
-
                 return function(step)
                 {
                     var rotation = currentRotation + (targetRotation-currentRotation)*step;
                     return "translate(" + self.config.cx + ", " + self.config.cy + ") rotate(" + rotation + ")";
                 }
             });
+        var svg = this.face
+        svg.transition().duration(undefined != transitionDuration ? transitionDuration : this.config.transitionDuration)
+            .styleTween("fill", function() {
+                return function(t){
+
+                    var pointValue = value;
+                    var over = value >= self.config.threshold?true:false
+                    console.log(over)
+                    return over?"d68170":"#ffffff"
+                }
+            })
     }
 
     this.valueToDegrees = function(value)

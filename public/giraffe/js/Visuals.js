@@ -841,7 +841,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
     },
 
 
-    gaugeFactory : function(size, anchor, label, min, max){
+    gaugeFactory : function(size, anchor, label, min, max,threshold){
         //console.log(anchor)
 
         var config =
@@ -851,7 +851,8 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
             min: undefined != min ? min : 0,
             max: undefined != max ? max : 100,
             minorTicks: 5,
-            majorTicks:10
+            majorTicks:10,
+            threshold:threshold||80
         }
 
         var range = config.max - config.min;
@@ -894,7 +895,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
             this._gauge = this.gaugeFactory(this.params.size,id,this.params.alias);
         } else {
             var formatterName = this.params.Formatter || "none"
-            console.log(formatterName)
+            //console.log(formatterName)
             var formatter = this._switchFormatter(formatterName)
             this.updateGauges(this._gauge,series,formatter)
         }

@@ -233,7 +233,7 @@ graphScaffold = function() {
     graph_template = "{{#dashboard_description}}\n    <div class=\"well\">{{{dashboard_description}}}</div>\n{{/dashboard_description}}\n" +
       //Visuals (gauges) div and svg
       "{{#gauges}}\n  {{#start_row}}\n "+
-        "<div class=\"row-fluid gauges\">\n  <p></p>{{/start_row}}\n    " +
+        "<div class=\"row-fluid gauges-group\">\n  <p></p>{{/start_row}}\n    " +
 //        "<div class=\"row\">\n " +
 //        "{{#gauges}}\n  "+
             "<div class=\"{{span}} offsetgauge\" id=\"gauge-{{graph_id}}\">\n      " +

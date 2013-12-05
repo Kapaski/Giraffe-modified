@@ -49,6 +49,20 @@ var dashboards =
 
                 },
                 {
+                    "alias": "cpu utilization %",
+                    "target": "servers.127_0_0_1_20001.serverLocal.Processor.*",  // target can use any graphite-supported wildcards
+                    //"annotator": 'events.deployment',  // a simple annotator will track a graphite event and mark it as 'deployment'.
+                    // enter your graphite target as a string
+                    "description": "cpu utilization revealed from both Processor Time % and Priviledged Time %. Higher % means slower performance",
+                    "interpolation": "linear",  // you can use different rickshaw interpolation values
+                    "stroke_width": 1 , // change stroke width
+                    "height" : 200,
+                    "size" : 200,
+                    "renderer": "gauge",
+                    "colspan" : 1
+
+                },
+                {
                     "alias": "available memory",
                     "target": "absolute(scale(servers.127_0_0_1_20001.serverLocal.memory.AvailableMemoryKb,1))",  // enter your graphite barebone target expression here
 
@@ -112,7 +126,7 @@ var dashboards =
                     "description": "Network IO performance",
                     "interpolation": "linear",
                     "height" : 200,
-                    "colspan": 1
+                    "colspan": 3
                 }
 
                    // instead of annotator, if you use the graphite events feature
@@ -141,7 +155,7 @@ var dashboards =
                     },
                     {
                         "alias": "% ActiveMQ Thread used",  // display name for this metric
-                        "target": "divideSeries(servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.ThreadCount,servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.TotalStartedThreadCount)",  // enter your graphite barebone target expression here
+                        "target": "divideSeries(servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.ThreadCount,servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.PeakThreadCount)",  // enter your graphite barebone target expression here
                         "description": "",  // enter your metric description here
                         "renderer": "gauge",
                         "size": 150, //currently for gauge only
@@ -186,7 +200,10 @@ var dashboards =
 
                     {
                         "alias": "10_5_250_45.threads",  // display name for this metric
-                        "target": "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.*",  // enter your graphite barebone target expression here
+                        "targets": ["servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.ThreadCount",
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.PeakThreadCount",
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.DaemonThreadCount"
+                                    ],  // enter your graphite barebone target expression here
                         "description": "The diagram indicates ActiveMQ threads usages", // enter your metric description here
                         "renderer": "bar",
 
@@ -228,6 +245,7 @@ var dashboards =
                     "stroke_width": 1 , // change stroke width
                     "height" : 300,
                     "renderer": "gauge",
+                    "size":150,
                     "colspan" : 1
 
                 },
