@@ -841,7 +841,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
     },
 
 
-    gaugeFactory : function(size, anchor, label, min, max,threshold){
+    gaugeFactory : function(size, anchor, label, min, max){
         //console.log(anchor)
 
         var config =
@@ -851,13 +851,15 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
             min: undefined != min ? min : 0,
             max: undefined != max ? max : 100,
             minorTicks: 5,
-            majorTicks:10,
-            threshold:threshold||80
+            majorTicks:10
+
         }
 
         var range = config.max - config.min;
-        config.yellowZones = [{ from: config.min + range*0.80, to: config.min + range*0.9 }];
-        config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+        config.threshold = this.params.threshold ||{value:80,factor:"gt"}
+        //this.params.yellowZones = [{from:0,to:10}]
+        config.yellowZones =this.params.yellowZones || [{ from: config.min + range*0.80, to: config.min + range*0.9 }];
+        config.redZones = this.params.redZones || [{ from: config.min + range*0.9, to: config.max }];
 
         var gauge = new Gauge(anchor, config);
         gauge.render();
@@ -870,7 +872,7 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
             for(var k = (series[0].data.length-1); k>=0; k--) {
                 value = series[0].data[k].y
                 if(value!=null){
-                    console.log("at "+k+" find "+value)
+                    //console.log("at "+k+" find "+value)
                     break;
 
                 }
@@ -901,4 +903,110 @@ Visuals.Graph.Renderer.Gauge = Visuals.Class.create( Visuals.Graph.Renderer, {
         }
 
     }
-} );
+});
+
+/*
+ * Todo: Add a new visualisation that is made of Text box with value in type of metrics.gauge
+ * display both value and timestamp
+ */
+Visuals.namespace('Visuals.Graph.Renderer.Box');
+Visuals.Graph.Renderer.Box = Visuals.Class.create( Visuals.Graph.Renderer, {
+
+    name: 'box',
+
+    _box :  {},
+
+    defaults:  function(){
+        return{
+            unstack: true,
+            fill: false,
+            stroke: true
+        }
+    },
+    seriesPathFactory: {},
+
+    _switchFormatter : function(formatterName) {
+        switch(formatterName) {
+            case "percent":
+                return this._percentFormatter;
+                break
+
+            default:
+                return this._noneFormatter;
+                break
+        }
+    },
+    _percentFormatter : function(d) {
+        if(d===null || d === 'undefined') return 0;
+        return (d*100).toFixed(2);
+
+    },
+
+    _noneFormatter : function(d) {
+        return d;
+    },
+
+
+    boxFactory : function(size, anchor, label, min, max){
+        //console.log(anchor)
+
+        var config =
+        {
+            size: size || 120,
+            label: label,
+            min: undefined != min ? min : 0,
+            max: undefined != max ? max : 100,
+            minorTicks: 5,
+            majorTicks:10
+
+        }
+
+        var range = config.max - config.min;
+        config.threshold = this.params.threshold ||{value:80,factor:"gt"}
+        //this.params.yellowZones = [{from:0,to:10}]
+        config.yellowZones =this.params.yellowZones || [{ from: config.min + range*0.80, to: config.min + range*0.9 }];
+        config.redZones = this.params.redZones || [{ from: config.min + range*0.9, to: config.max }];
+
+        var box = new box(anchor, config);
+        box.render();
+        return box;
+    },
+
+    updateBox : function(box, series,formatter){
+
+        var value;
+        for(var k = (series[0].data.length-1); k>=0; k--) {
+            value = series[0].data[k].y
+            if(value!=null){
+                //console.log("at "+k+" find "+value)
+                break;
+
+            }
+        }
+        //console.log(box)
+
+        if (value!=null) {
+            var v = formatter(value)
+            box.redraw(v)
+        };
+
+
+    },
+
+    render : function(series) {
+
+
+        var id = "#box-"+this.params.anchor.replace("#","")
+        var svgid = "#box-"+id.replace("#","")
+        //console.log($(svgid).length)
+        if(!$(svgid).length>0) {
+            this._box = this.boxFactory(this.params.size,id,this.params.alias);
+        } else {
+            var formatterName = this.params.Formatter || "none"
+            //console.log(formatterName)
+            var formatter = this._switchFormatter(formatterName)
+            this.updateBox(this._box,series,formatter)
+        }
+
+    }
+});

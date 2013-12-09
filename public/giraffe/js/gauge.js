@@ -247,8 +247,18 @@ function Gauge(placeholderName, configuration)
                 return function(t){
 
                     var pointValue = value;
-                    var over = value >= self.config.threshold?true:false
-                    console.log(over)
+                    var over = false
+                    var threshold = self.config.threshold
+                    if(threshold.factor==="lt") {
+                        if(value <= threshold.value) {
+                            over = true;
+                        }
+                    } else {
+                        if(value >= threshold.value) {
+                            over = true;
+                        }
+                    }
+                    //console.log(threshold)
                     return over?"d68170":"#ffffff"
                 }
             })

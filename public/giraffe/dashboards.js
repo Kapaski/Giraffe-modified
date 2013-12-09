@@ -19,7 +19,10 @@ var dashboards =
                         "renderer": "gauge",
                         "size": 150, //currently for gauge only
                         "width":280,
-                        "Formatter":"none"
+                        "Formatter":"none",
+                        "yellowZones":[{from:10,to:20}],
+                        "redZones":[{from:0,to:10}],
+                        "threshold":{value:20,factor:"lt"} //factor lt = less than or equal to, gt = greater than or equal to
                     },
                     {
                         "alias": "% Memory Commited",  // display name for this metric
@@ -29,6 +32,7 @@ var dashboards =
                         "size": 150, //currently for gauge only
                         "width":200,
                         "Formatter":"none"
+
                     }
 
 
@@ -59,7 +63,10 @@ var dashboards =
                     "height" : 200,
                     "size" : 200,
                     "renderer": "gauge",
-                    "colspan" : 1
+                    "colspan" : 1,
+                    "yellowZones":[{from:10,to:20}],
+                    "redZones":[{from:0,to:10}],
+                    "threshold":{value:20,factor:"lt"} //factor lt = less than or equal to, gt = greater than or equal to
 
                 },
                 {
@@ -145,6 +152,45 @@ var dashboards =
             "gauges" :
                 [
                     {
+                        "alias": "% Mule memory Available",  // display name for this metric
+                        "target": "divideSeries(servers.127_0_0_1_20003.serverLocal.Mule.agent.FreeMemory,servers.127_0_0_1_20003.serverLocal.Mule.agent.TotalMemory)",  // enter your graphite barebone target expression here
+                        "description": "",  // enter your metric description here
+                        "renderer": "gauge",
+                        "size": 150, //currently for gauge only
+                        "width":280,
+                        "Formatter":"percent"
+                    }
+
+                ],
+            "metrics":  // metrics is an array of charts on the dashboard
+                [
+
+
+
+                    {
+                        "alias": "10_5_250_45.Mule Server.memory",  // display name for this metric
+                        "target":"servers.127_0_0_1_20003.serverLocal.Mule.agent.*",  // enter your graphite barebone target expression here
+
+                        "description": "", // enter your metric description here
+                        "renderer": "line",
+                        "height" : 200,
+                        "colspan":3,
+                        "summaryFormatterName" : "KMGTP",
+                        "legendFormatterName" : "KMGTP",
+                        "yFormatterName" : "KMGTP"
+                    }
+                ]
+        },
+        { "name": "SPS MQ Metrics",  // give your dashboard a name (required!)
+            "refresh": 5000,  // each dashboard has its own refresh interval (in ms)
+            // add an (optional) dashboard description. description can be written in markdown / html.
+            //"scheme": "colorwheel",
+            "description": "\n###ActiveMQ system health metrics"
+                + "\n Monitoring ActiveMQ and ESB (Currently ActiveMQ on localhost)"
+                + "\n",
+            "gauges" :
+                [
+                    {
                         "alias": "%  ActiveMQ heap memory used",  // display name for this metric
                         "target": "divideSeries(servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_used,servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_init)",  // enter your graphite barebone target expression here
                         "description": "",  // enter your metric description here
@@ -203,7 +249,7 @@ var dashboards =
                         "targets": ["servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.ThreadCount",
                             "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.PeakThreadCount",
                             "servers.127_0_0_1_20001.serverLocal.ActiveMQ.threads.DaemonThreadCount"
-                                    ],  // enter your graphite barebone target expression here
+                        ],  // enter your graphite barebone target expression here
                         "description": "The diagram indicates ActiveMQ threads usages", // enter your metric description here
                         "renderer": "bar",
 
@@ -216,8 +262,8 @@ var dashboards =
                     {
                         "alias": "10_5_250_45.jvm.memory",  // display name for this metric
                         "targets": ["servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_init",
-                                    "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_used",
-                                    "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_committed"
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_used",
+                            "servers.127_0_0_1_20001.serverLocal.ActiveMQ.heap.HeapMemoryUsage_committed"
                         ],  // enter your graphite barebone target expression here
 
                         "description": "", // enter your metric description here
@@ -229,7 +275,6 @@ var dashboards =
                     }
                 ]
         },
-
         { "name": "SPS Overall Metrics",
             "refresh": 10000,
             "scheme": "spectrum2001",

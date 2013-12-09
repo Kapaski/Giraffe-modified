@@ -640,14 +640,18 @@ Rickshaw.Graph.JSONP.Graphite = Rickshaw.Class.create(Rickshaw.Graph.JSONP, {
   getAjaxData: function(period) {
     var deferred;
     this.period = period;
-    return deferred = $.ajax({
+      //console.log("max "+this.args.width)
+      //console.log(generateDataURL(this.args.targets, this.args.annotator_target, this.args.width))
+      return deferred = $.ajax({
       dataType: 'json',
-      url: generateDataURL(this.args.targets, this.args.annotator_target, this.args.width),
+      url: generateDataURL(this.args.targets, this.args.annotator_target,this.args.width),
       error: this.error.bind(this)
     });
   }
 });
-
+/*
+ * Customised extra visualisations to Giraffe
+ */
 Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
     request: function() {
         return this.refreshGraph(period);
@@ -658,6 +662,7 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
         deferred = this.getAjaxData(period);
 
         return deferred.done(function(result) {
+
             var annotations, el, i, result_data, series, _i, _len;
             if (result.length <= 0) {
                 return;
@@ -805,6 +810,7 @@ Visuals.Graph.JSONP.Graphite = Visuals.Class.create(Visuals.Graph.JSONP, {
     getAjaxData: function(period) {
         var deferred;
         this.period = period;
+        //console.log(generateDataURL(this.args.targets, this.args.annotator_target, this.args.width))
         return deferred = $.ajax({
             dataType: 'json',
             url: generateDataURL(this.args.targets, this.args.annotator_target, this.args.width),
@@ -820,6 +826,9 @@ function getGaugeInstance(obj, anchor, metric) {
         anchor: anchor,
         size:metric.size,
         Formatter: metric.Formatter,
+        yellowZones:metric.yellowZones,
+        redZones:metric.redZones,
+        threshold:metric.threshold,
         alias:metric.alias,
         targets: metric.target || metric.targets,
         summary: metric.summary,
@@ -1022,6 +1031,7 @@ $(window).bind('hashchange', function(e) {
   var dash, timeFrame, _ref, _ref1;
   timeFrame = ((_ref = e.getState()) != null ? _ref.timeFrame : void 0) || $(".timepanel a.range[data-timeframe='" + default_period + "']")[0].text || "1d";
   dash = (_ref1 = e.getState()) != null ? _ref1.dashboard : void 0;
+
   if (dash !== dashboard.name) {
     changeDashboard(dash);
   }
